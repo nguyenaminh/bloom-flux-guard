@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { useTasks } from '@/hooks/useTasks';
 import { Task, TaskStatus, TaskPriority } from '@/types/task';
 import { TaskCard } from '@/components/TaskCard';
@@ -7,7 +8,7 @@ import { TaskFilters } from '@/components/TaskFilters';
 import { TaskStats } from '@/components/TaskStats';
 import { EmptyState } from '@/components/EmptyState';
 import { Button } from '@/components/ui/button';
-import { Plus, Sparkles } from 'lucide-react';
+import { Plus, Sparkles, BarChart3 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
@@ -93,10 +94,17 @@ const Index = () => {
               </div>
             </div>
             
-            <Button onClick={handleOpenForm} className="gap-2 shadow-sm">
-              <Plus className="h-4 w-4" />
-              <span className="hidden sm:inline">New Task</span>
-            </Button>
+            <div className="flex items-center gap-2">
+              <Link to="/dashboard">
+                <Button variant="outline" size="icon" className="shadow-sm">
+                  <BarChart3 className="h-4 w-4" />
+                </Button>
+              </Link>
+              <Button onClick={handleOpenForm} className="gap-2 shadow-sm">
+                <Plus className="h-4 w-4" />
+                <span className="hidden sm:inline">New Task</span>
+              </Button>
+            </div>
           </div>
 
           {/* Stats */}
