@@ -7,13 +7,18 @@ import { TaskForm } from '@/components/TaskForm';
 import { TaskFilters } from '@/components/TaskFilters';
 import { TaskStats } from '@/components/TaskStats';
 import { EmptyState } from '@/components/EmptyState';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
 import { Plus, Sparkles, BarChart3 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useTaskReminders } from '@/hooks/useTaskReminders';
 
 const Index = () => {
   const { tasks, isLoaded, addTask, updateTask, deleteTask } = useTasks();
   const { toast } = useToast();
+  
+  // Show reminders for overdue/due soon tasks on load
+  useTaskReminders(tasks, isLoaded);
   
   const [formOpen, setFormOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
@@ -95,6 +100,7 @@ const Index = () => {
             </div>
             
             <div className="flex items-center gap-2">
+              <ThemeToggle />
               <Link to="/dashboard">
                 <Button variant="outline" size="icon" className="shadow-sm">
                   <BarChart3 className="h-4 w-4" />
